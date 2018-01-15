@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_847" default="compile.module.847">
+  <dirname property="module.847.basedir" file="${ant.file.module_847}"/>
+  
+  <property name="module.jdk.home.847" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.847" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.847" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.847" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="847.output.dir" value="${module.847.basedir}/target/classes"/>
+  <property name="847.testoutput.dir" value="${module.847.basedir}/target/test-classes"/>
+  
+  <path id="847.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="847.module.production.classpath">
+    <path refid="${module.jdk.classpath.847}"/>
+    <pathelement location="${basedir}/jar/XMLInputFormat.jar"/>
+    <path refid="library.org.apache.spark:spark-core_2.11:2.1.0.classpath"/>
+    <path refid="library.org.apache.spark:spark-sql_2.11:2.1.0.classpath"/>
+  </path>
+  
+  <path id="847.runtime.production.module.classpath">
+    <pathelement location="${847.output.dir}"/>
+    <pathelement location="${basedir}/jar/XMLInputFormat.jar"/>
+    <path refid="library.org.apache.spark:spark-core_2.11:2.1.0.classpath"/>
+    <path refid="library.org.apache.spark:spark-sql_2.11:2.1.0.classpath"/>
+  </path>
+  
+  <path id="847.module.classpath">
+    <path refid="${module.jdk.classpath.847}"/>
+    <pathelement location="${847.output.dir}"/>
+    <pathelement location="${basedir}/jar/XMLInputFormat.jar"/>
+    <path refid="library.org.apache.spark:spark-core_2.11:2.1.0.classpath"/>
+    <path refid="library.org.apache.spark:spark-sql_2.11:2.1.0.classpath"/>
+  </path>
+  
+  <path id="847.runtime.module.classpath">
+    <pathelement location="${847.testoutput.dir}"/>
+    <pathelement location="${847.output.dir}"/>
+    <pathelement location="${basedir}/jar/XMLInputFormat.jar"/>
+    <path refid="library.org.apache.spark:spark-core_2.11:2.1.0.classpath"/>
+    <path refid="library.org.apache.spark:spark-sql_2.11:2.1.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.847">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.847">
+    <patternset refid="excluded.from.module.847"/>
+  </patternset>
+  
+  <path id="847.module.sourcepath">
+    <dirset dir="${module.847.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="847.module.test.sourcepath">
+    <dirset dir="${module.847.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.847" depends="compile.module.847.production,compile.module.847.tests" description="Compile module 847"/>
+  
+  <target name="compile.module.847.production" depends="register.custom.compilers" description="Compile module 847; production classes">
+    <mkdir dir="${847.output.dir}"/>
+    <javac2 destdir="${847.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.847}/javac">
+      <compilerarg line="${compiler.args.847}"/>
+      <bootclasspath refid="847.module.bootclasspath"/>
+      <classpath refid="847.module.production.classpath"/>
+      <src refid="847.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.847"/>
+    </javac2>
+    
+    <copy todir="${847.output.dir}">
+      <fileset dir="${module.847.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.847.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.847.tests" depends="register.custom.compilers,compile.module.847.production" description="compile module 847; test classes" unless="skip.tests">
+    <mkdir dir="${847.testoutput.dir}"/>
+    <javac2 destdir="${847.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.847}/javac">
+      <compilerarg line="${compiler.args.847}"/>
+      <bootclasspath refid="847.module.bootclasspath"/>
+      <classpath refid="847.module.classpath"/>
+      <src refid="847.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.847"/>
+    </javac2>
+    
+    <copy todir="${847.testoutput.dir}">
+      <fileset dir="${module.847.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.847" description="cleanup module">
+    <delete dir="${847.output.dir}"/>
+    <delete dir="${847.testoutput.dir}"/>
+  </target>
+</project>
