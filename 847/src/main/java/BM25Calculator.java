@@ -1,3 +1,7 @@
+/**
+*A class project building a ranked search system using Apache Spark.
+*With the BM25 value we can give each news a credible rank.
+*/
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -22,7 +26,7 @@ public class BM25Calculator
 
         // set up Spark
         config = new SparkConf().setMaster("local[4]")
-                .setAppName("Boolean Search System")
+                .setAppName("BM25 Search System")
                 .set("spark.io.compression.codec", "org.apache.spark.io.LZ4CompressionCodec")
                 .set("spark.hadoop.validateOutputSpecs", "false")
                 .set("spark.driver.maxResultSize","10G")
